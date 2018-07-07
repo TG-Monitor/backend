@@ -1,7 +1,7 @@
 package ai.quantumsense.tgmonitor.backend;
 
-import java.util.Set;
+import ai.quantumsense.tgmonitor.backend.datastructures.PatternMatch;
 
 public interface Notificator {
-    void notifyPatternMatch(TelegramMessage message, Set<String> patterns);
+    void notify(PatternMatch match);
 }

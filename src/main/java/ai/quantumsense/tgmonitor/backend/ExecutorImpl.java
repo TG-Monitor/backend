@@ -4,44 +4,62 @@ import ai.quantumsense.tgmonitor.monitor.Executor;
 import ai.quantumsense.tgmonitor.monitor.Monitor;
 
 import java.util.Timer;
-import java.util.TimerTask;
 
 public class ExecutorImpl implements Executor {
 
     private Monitor monitor;
-    private Interactor interactor;
-    private TelegramApi telegramApi;
+    private Telegram telegram;
 
     private boolean running = false;
     private Timer timer = new Timer();
 
-    public ExecutorImpl(Monitor monitor, Interactor interactor, TelegramApi telegramApi) {
+    public ExecutorImpl(Monitor monitor, Telegram telegram) {
         this.monitor = monitor;
-        this.interactor = interactor;
-        this.telegramApi = telegramApi;
+        this.telegram = telegram;
+    }
+
+//    @Override
+//    public void start(int intervalInSeconds) {
+//        timer.scheduleAtFixedRate(new TimerTask() {
+//            @Override
+//            public void run() {
+//                interactor.processNewMessages(telegram.getNewMessages(monitor.getPeers()));
+//            }
+//        }, 0, intervalInSeconds * 1000);
+//        running = true;
+//    }
+//
+//    @Override
+//    public void pause() {
+//        timer.cancel();
+//        running = false;
+//    }
+//
+//    @Override
+//    public boolean isRunning() {
+//        return running;
+//    }
+
+
+    @Override
+    public void startAll() {
+        for (String p : monitor.getPeers())
+            startPeer(p);
     }
 
     @Override
-    public void start(int intervalInSeconds) {
-        timer.scheduleAtFixedRate(new TimerTask() {
-            @Override
-            public void run() {
-                interactor.processNewMessages(telegramApi.getNewMessages(monitor.getPeers()));
-            }
-        }, 0, intervalInSeconds * 1000);
-        running = true;
+    public void stopAll() {
+        for (String p : monitor.getPeers())
+            stopPeer(p);
     }
 
     @Override
-    public void pause() {
-        timer.cancel();
-        running = false;
+    public void startPeer(String peer) {
+        telegram.startPeer(peer);
     }
 
     @Override
-    public boolean isRunning() {
-        return running;
+    public void stopPeer(String peer) {
+        telegram.stopPeer(peer);
     }
-
-
 }

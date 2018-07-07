@@ -4,24 +4,24 @@ import ai.quantumsense.tgmonitor.monitor.Authenticator;
 
 public class AuthenticatorImpl implements Authenticator {
 
-    private TelegramApi telegramApi;
+    private Telegram telegram;
 
-    public AuthenticatorImpl(TelegramApi telegramApi) {
-        this.telegramApi = telegramApi;
+    public AuthenticatorImpl(Telegram telegram) {
+        this.telegram = telegram;
     }
 
     @Override
     public void login(String phoneNumber) {
-        telegramApi.login(phoneNumber);
+        telegram.login(phoneNumber);
     }
 
     @Override
     public void logout() {
-        telegramApi.logout();
+        telegram.logout();
     }
 
     @Override
     public boolean isLoggedIn() {
-        return telegramApi.isLoggedIn();
+        return telegram.isLoggedIn();
     }
 }

@@ -1,4 +1,4 @@
-package ai.quantumsense.tgmonitor.backend;
+package ai.quantumsense.tgmonitor.backend.datastructures;
 
 public class TelegramMessage {
 
