@@ -4,7 +4,7 @@ public interface Telegram {
     void login(String phoneNumber);
     void logout();
     boolean isLoggedIn();
-    void startPeer(String peer);
-    void stopPeer(String peer);
-    int numberOfPeers();
+    void start(String peer);
+    void stop(String peer);
+    int numberOfMonitors();
 }

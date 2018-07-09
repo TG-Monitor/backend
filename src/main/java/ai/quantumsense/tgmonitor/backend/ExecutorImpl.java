@@ -44,22 +44,22 @@ public class ExecutorImpl implements Executor {
     @Override
     public void startAll() {
         for (String p : monitor.getPeers())
-            startPeer(p);
+            start(p);
     }
 
     @Override
     public void stopAll() {
         for (String p : monitor.getPeers())
-            stopPeer(p);
+            stop(p);
     }
 
     @Override
-    public void startPeer(String peer) {
-        telegram.startPeer(peer);
+    public void start(String peer) {
+        telegram.start(peer);
     }
 
     @Override
-    public void stopPeer(String peer) {
-        telegram.stopPeer(peer);
+    public void stop(String peer) {
+        telegram.stop(peer);
     }
 }

@@ -25,5 +25,7 @@ allprojects {
     }
 }
 dependencies {
-    implementation 'com.github.tg-monitor:monitor:632edcdc8058ac3bd5c97eda29634e2679a958f9'
+    //implementation 'com.github.tg-monitor:monitor:632edcdc8058ac3bd5c97eda29634e2679a958f9'
+    compile files('../monitor/build/libs/monitor-0.0.1.jar')
+
 }

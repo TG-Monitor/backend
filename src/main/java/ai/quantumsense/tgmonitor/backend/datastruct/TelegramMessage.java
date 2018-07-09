@@ -2,7 +2,6 @@ package ai.quantumsense.tgmonitor.backend.datastruct;
 
 import javax.annotation.Nullable;
 import java.time.Instant;
-import java.time.ZoneId;
 import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
@@ -60,9 +59,9 @@ public class TelegramMessage {
         return (new StringBuilder())
                 .append("ID: ").append(id)
                 .append("\nReply to ID: ").append(replyMessageId)
-                .append("\nDate: ").append(formatDate())
-                .append("\nFrom: ").append(sender)
                 .append("\nText (starts on next line):\n" ).append(text)
+                .append("\nFrom: ").append(sender)
+                .append("\nDate: ").append(formatDate())
                 .append("\nChat: ").append(peer)
                 .toString();
     }
@@ -70,7 +69,7 @@ public class TelegramMessage {
     private String formatDate() {
         Instant instant = Instant.ofEpochSecond(date);
         ZonedDateTime date = ZonedDateTime.ofInstant(instant, ZoneOffset.UTC);
-        DateTimeFormatter format = DateTimeFormatter.ofPattern("YYYY-MM-dd HH:mm:ss '[UTC]'");
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("YYYY-MM-dd HH:mm:ss 'UTC'");
         return date.format(format);
     }
 
@@ -115,11 +114,13 @@ public class TelegramMessage {
         @Override
         public String toString() {
             return (new StringBuilder())
+                    .append("{ ")
                     .append("ID: ").append(id)
-                    .append(", first name: ").append(firstName)
-                    .append(", last name: " ).append(lastName)
-                    .append(", username: ").append(username)
-                    .append(", is bot: ").append(isBot())
+                    .append(", First Name: ").append(firstName)
+                    .append(", Last Name: " ).append(lastName)
+                    .append(", Username: ").append(username)
+                    .append(", Is Bot: ").append(isBot())
+                    .append(" }")
                     .toString();
         }
     }
@@ -150,9 +151,11 @@ public class TelegramMessage {
         @Override
         public String toString() {
             return (new StringBuilder())
+                    .append("{ ")
                     .append("ID: ").append(id)
-                    .append(", title: ").append(title)
-                    .append(", username: ").append(username)
+                    .append(", Title: ").append(title)
+                    .append(", Username: ").append(username)
+                    .append(" }")
                     .toString();
         }
     }
