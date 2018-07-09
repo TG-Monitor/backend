@@ -1,8 +1,7 @@
 package ai.quantumsense.tgmonitor.backend;
 
-import ai.quantumsense.tgmonitor.backend.datastructures.PatternMatch;
-import ai.quantumsense.tgmonitor.backend.datastructures.TelegramMessage;
-import ai.quantumsense.tgmonitor.monitor.Monitor;
+import ai.quantumsense.tgmonitor.backend.datastruct.PatternMatch;
+import ai.quantumsense.tgmonitor.backend.datastruct.TelegramMessage;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
@@ -19,6 +18,7 @@ public class Interactor {
         this.notificator = notificator;
     }
 
+    // Called by multiple threads from Telethon component
     public void messageReceived(TelegramMessage msg) {
         matcher.newMessage(msg);
     }
