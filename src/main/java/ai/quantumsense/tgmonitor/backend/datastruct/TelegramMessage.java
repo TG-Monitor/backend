@@ -3,6 +3,7 @@ package ai.quantumsense.tgmonitor.backend.datastruct;
 import javax.annotation.Nullable;
 import java.time.Instant;
 import java.time.ZoneId;
+import java.time.ZoneOffset;
 import java.time.ZonedDateTime;
 import java.time.format.DateTimeFormatter;
 
@@ -58,7 +59,7 @@ public class TelegramMessage {
     public String toString() {
         return (new StringBuilder())
                 .append("ID: ").append(id)
-                .append("\nReply to: ").append(replyMessageId)
+                .append("\nReply to ID: ").append(replyMessageId)
                 .append("\nDate: ").append(formatDate())
                 .append("\nFrom: ").append(sender)
                 .append("\nText (starts on next line):\n" ).append(text)
@@ -68,9 +69,9 @@ public class TelegramMessage {
 
     private String formatDate() {
         Instant instant = Instant.ofEpochSecond(date);
-        ZoneId timeZone = ZoneId.of("GMT");
-        ZonedDateTime date = ZonedDateTime.ofInstant(instant, timeZone);
-        return date.format(DateTimeFormatter.ISO_ZONED_DATE_TIME);
+        ZonedDateTime date = ZonedDateTime.ofInstant(instant, ZoneOffset.UTC);
+        DateTimeFormatter format = DateTimeFormatter.ofPattern("YYYY-MM-dd HH:mm:ss '[UTC]'");
+        return date.format(format);
     }
 
     public static class Sender {
