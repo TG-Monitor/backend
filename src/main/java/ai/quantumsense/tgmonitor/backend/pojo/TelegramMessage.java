@@ -1,4 +1,4 @@
-package ai.quantumsense.tgmonitor.backend.datastruct;
+package ai.quantumsense.tgmonitor.backend.pojo;
 
 import javax.annotation.Nullable;
 import java.time.Instant;
