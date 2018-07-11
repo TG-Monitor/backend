@@ -1,6 +1,6 @@
 package ai.quantumsense.tgmonitor.backend;
 
-import ai.quantumsense.tgmonitor.monitor.Authenticator;
+import ai.quantumsense.tgmonitor.monitor.control.Authenticator;
 
 public class AuthenticatorImpl implements Authenticator {
 

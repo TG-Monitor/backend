@@ -1,55 +1,33 @@
 package ai.quantumsense.tgmonitor.backend;
 
-import ai.quantumsense.tgmonitor.monitor.Executor;
-import ai.quantumsense.tgmonitor.monitor.Monitor;
+import ai.quantumsense.tgmonitor.monitor.control.Executor;
+import ai.quantumsense.tgmonitor.monitor.data.MonitorDataFactory;
 
+import java.util.Set;
 import java.util.Timer;
 
 public class ExecutorImpl implements Executor {
 
-    private Monitor monitor;
     private Telegram telegram;
+    private MonitorDataFactory monitorDataFactory;
 
     private boolean running = false;
     private Timer timer = new Timer();
 
-    public ExecutorImpl(Monitor monitor, Telegram telegram) {
-        this.monitor = monitor;
+    public ExecutorImpl(Telegram telegram, MonitorDataFactory monitorDataFactory) {
         this.telegram = telegram;
+        this.monitorDataFactory = monitorDataFactory;
     }
-
-//    @Override
-//    public void start(int intervalInSeconds) {
-//        timer.scheduleAtFixedRate(new TimerTask() {
-//            @Override
-//            public void run() {
-//                interactor.processNewMessages(telegram.getNewMessages(monitor.getPeers()));
-//            }
-//        }, 0, intervalInSeconds * 1000);
-//        running = true;
-//    }
-//
-//    @Override
-//    public void pause() {
-//        timer.cancel();
-//        running = false;
-//    }
-//
-//    @Override
-//    public boolean isRunning() {
-//        return running;
-//    }
-
 
     @Override
     public void startAll() {
-        for (String p : monitor.getPeers())
+        for (String p : peers())
             start(p);
     }
 
     @Override
     public void stopAll() {
-        for (String p : monitor.getPeers())
+        for (String p : peers())
             stop(p);
     }
 
@@ -61,5 +39,9 @@ public class ExecutorImpl implements Executor {
     @Override
     public void stop(String peer) {
         telegram.stop(peer);
+    }
+
+    private Set<String> peers() {
+        return monitorDataFactory.getMonitorData().getPeers();
     }
 }

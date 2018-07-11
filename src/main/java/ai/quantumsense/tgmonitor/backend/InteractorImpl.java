@@ -9,13 +9,19 @@ public class InteractorImpl implements Interactor{
 
     private final static Logger LOG = LogManager.getLogger(InteractorImpl.class);
 
+    private static Interactor instance = null;
+
     private PatternMatcher matcher;
     private Notificator notificator;
 
+    public static Interactor get() {
+        return instance;
+    }
 
     public InteractorImpl(PatternMatcher matcher, Notificator notificator) {
         this.matcher = matcher;
         this.notificator = notificator;
+        instance = this;
     }
 
     // Called by multiple threads from Telethon component
@@ -28,19 +34,4 @@ public class InteractorImpl implements Interactor{
     public void matchFound(PatternMatch match) {
         notificator.notify(match);
     }
-
-//    void processNewMessages(Map<String, List<TelegramMessage>> newMessages) {
-//        Set<String> patterns = monitor.getPatterns();
-//        for (Map.Entry<String, List<TelegramMessage>> entry : newMessages.entrySet()) {
-//            LOG.debug("Processing " + entry.getKey() + " messages:");
-//            for (TelegramMessage message : entry.getValue()) {
-//                LOG.debug(message.toString());
-//                Set<String> matchingPatterns = matcher.match(message, patterns);
-//                if (matchingPatterns != null) {
-//                    LOG.debug("** Matches the following patterns: " + String.join(", ", matchingPatterns));
-//                    notificator.notifyPatternMatch(message, matchingPatterns);
-//                }
-//            }
-//        }
-//    }
 }
