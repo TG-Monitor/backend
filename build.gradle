@@ -24,6 +24,9 @@ allprojects {
         maven { url "https://jitpack.io" }
     }
 }
+configurations.all {
+    resolutionStrategy.cacheChangingModulesFor 0, 'seconds'
+}
 dependencies {
-    implementation 'com.github.tg-monitor:monitor:f342a65f5a983b0612d3d4827cc8e1ca85723df9'
+    implementation 'com.github.tg-monitor:monitor:master-SNAPSHOT'
 }
