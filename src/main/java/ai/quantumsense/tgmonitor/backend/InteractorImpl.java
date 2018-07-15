@@ -22,11 +22,13 @@ public class InteractorImpl implements Interactor{
     // Called by multiple threads from Telethon component
     @Override
     public void messageReceived(TelegramMessage msg) {
+        LOG.debug("Message received: " + msg.getText());
         matcher.newMessage(msg);
     }
 
     @Override
     public void matchFound(PatternMatch match) {
+        LOG.debug("Pattern match found in: " + match.getMessage());
         notificator.notify(match);
     }
 }
