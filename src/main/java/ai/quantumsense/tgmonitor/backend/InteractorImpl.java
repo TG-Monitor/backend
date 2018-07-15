@@ -28,7 +28,7 @@ public class InteractorImpl implements Interactor{
 
     @Override
     public void matchFound(PatternMatch match) {
-        System.out.println("Pattern match found in: " + match.getMessage());
+        System.out.println("Pattern match found in: " + match.getMessage().getText());
         notificator.notify(match);
     }
 }
