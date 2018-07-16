@@ -10,7 +10,6 @@ public class InteractorImpl implements Interactor{
     private Notificator notificator;
 
     public InteractorImpl(PatternMatcher matcher, Notificator notificator, ServiceLocator<Interactor> interactorLocator) {
-        System.out.println("InteractorImpl constructor");
         this.matcher = matcher;
         this.notificator = notificator;
         interactorLocator.registerService(this);
@@ -19,13 +18,11 @@ public class InteractorImpl implements Interactor{
     // Called by multiple threads from Telethon component
     @Override
     public void messageReceived(TelegramMessage msg) {
-        System.out.println("Message received: " + msg.getText());
         matcher.newMessage(msg);
     }
 
     @Override
     public void matchFound(PatternMatch match) {
-        System.out.println("Pattern match found in: " + match.getMessage().getText());
         notificator.notify(match);
     }
 }
