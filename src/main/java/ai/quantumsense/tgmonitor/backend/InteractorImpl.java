@@ -10,6 +10,7 @@ public class InteractorImpl implements Interactor{
     private Notificator notificator;
 
     public InteractorImpl(PatternMatcher matcher, Notificator notificator, ServiceLocator<Interactor> interactorLocator) {
+        System.out.println("InteractorImpl constructor");
         this.matcher = matcher;
         this.notificator = notificator;
         interactorLocator.registerService(this);
