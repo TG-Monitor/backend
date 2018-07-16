@@ -15,7 +15,6 @@ public class InteractorImpl implements Interactor{
         interactorLocator.registerService(this);
     }
 
-    // Called by multiple threads from Telethon component
     @Override
     public void messageReceived(TelegramMessage msg) {
         matcher.newMessage(msg);
