@@ -3,12 +3,8 @@ package ai.quantumsense.tgmonitor.backend;
 import ai.quantumsense.tgmonitor.backend.pojo.PatternMatch;
 import ai.quantumsense.tgmonitor.backend.pojo.TelegramMessage;
 import ai.quantumsense.tgmonitor.servicelocator.ServiceLocator;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 public class InteractorImpl implements Interactor{
-
-    private final static Logger LOG = LogManager.getLogger(InteractorImpl.class);
 
     private PatternMatcher matcher;
     private Notificator notificator;
